@@ -1,31 +1,45 @@
 import React from 'react';
-import HelloLoader from "./module1/loader.js";
 import ListLoader from "./module2/loader.js";
+import TextLoader from './module3/loader.js';
+import HelloLoader from './module1/loader.js';
+
+import ComponentProxi from './proxy.js';
+
+var Empty = React.createClass({
+  render () {
+    return <div></div>;
+  }
+});
 
 var Main = React.createClass({
 
   getInitialState() {
-    return {};
+    return { component: <Empty/> };
   },
 
-  componentWillMount() {
+  
+  loadText() {
+    this.setState({ component: <ComponentProxi loader={TextLoader} color='yellow'/> });
+  },
 
-    HelloLoader().then((helloComponent) => {
-      this.setState({ hello: helloComponent })
-    });
+  loadList() {
+    this.setState({ component: <ComponentProxi loader={ListLoader} color='pink'/> });
+  },
 
-    ListLoader().then((listComponent) => {
-      this.setState({ list: listComponent })
-    });
-
+  loadHello() {
+    this.setState({ component: <ComponentProxi loader={HelloLoader} color='pink'/> });
   },
  
   render() {
+    // console.log(this.state.component);
       return (
         <div>
           <h1>Main component</h1>
-          { this.state.hello ? <this.state.hello/> : <h3>Loading text in 2 seconds...wait please</h3>}
-          { this.state.list ? <this.state.list/> : <h3>Loading list in 3 seconds...wait please</h3>}
+          <button onClick={this.loadText}>Load Text</button>
+          <button onClick={this.loadList}>Load List</button>
+          <button onClick={this.loadHello}>Load Hello</button>
+          {this.state.component}
+
         </div>
       );
   }

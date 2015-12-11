@@ -22,9 +22,11 @@ class List extends React.Component {
   }
 
   render() {
-
+    
+    let color = this.props.color || 'white';
+    let style = {background: color};
     return (
-      <ul>
+      <ul style={style}>
       {
         names.map(function (name) {
           return (<li key={name}>{name}</li>);

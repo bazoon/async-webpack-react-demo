@@ -1,12 +1,12 @@
 'use strict';
 
-export default () => {  
+export default function TextLoader () {  
   return new Promise(resolve => {
     require.ensure([], () => {
 
       setTimeout(function () {
-        let hello = require('./hello.jsx');
-        resolve(hello);  
+        let Text = require('./text.jsx');
+        resolve(Text);  
       }, 2000);
       
 

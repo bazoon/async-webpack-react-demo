@@ -1,13 +1,13 @@
 'use strict';
 
-export default () => {  
+export default function ListLoader () {  
   return new Promise(resolve => {
     require.ensure([], () => {
 
       setTimeout(function () {
         let List = require('./list.jsx');
         resolve(List);  
-      }, 3000);
+      }, 2000);
       
 
     });
